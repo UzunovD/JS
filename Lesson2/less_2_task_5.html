@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="less_2_task_4.js"></script>
+    <script src="less_2_task_5.js"></script>
+    <script>
+      'use strict';
+
+      // 5. Реализовать функцию с тремя параметрами: function mathOperation
+      // (arg1, arg2, operation), где arg1, arg2 – значения аргументов,
+      // operation – строка с названием операции. В зависимости от переданного
+      // значения операции (использовать switch) выполнить одну из арифметических
+      // операций (использовать функции из задания 4) и вернуть полученное
+      // значение.
+
+      // подключил скрипт из 4 задания и получил доступ к ранее разработанным
+      // функциям. Функцию mathOperation() разместил в less_2_task_5.js, чтоб
+      // не загромаждать код.
+
+      let resalt = mathOperation(3, 4, '+');
+      console.log('resalt "+": ', resalt);
+      resalt = mathOperation(0, 5, '-');
+      console.log('resalt "-": ', resalt);
+      resalt = mathOperation(2, 6, '*');
+      console.log('resalt "*": ', resalt);
+      resalt = mathOperation(8, 4, '/');
+      console.log('resalt "/": ', resalt);
+    </script>
+  </body>
+</html>
