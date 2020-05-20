@@ -15,45 +15,46 @@
 // зависимости от введенного числа.
 
 /**
- *@function getCount() gets a number from user and checks if it is a number
+ *@function checkPrompt() gets a number from user and checks if it is a number
  * if input is NaN function say 'input is not a number' and calls itself 
  * recursively
  * 
  * @param {string} input
  * @returns {string} input - checked number in string type
  */
-function getCount() {
-  let input = prompt('Введите сумму для внесения на счет:')
-  if (isNaN(input)) {
+function checkPrompt() {
+  let money = prompt('Введите сумму для внесения на счет:')
+  if (isNaN(money) || money == '' || money == ' ') {
     alert('Введено не число');
-    getCount();
+    checkPrompt();
   } else {
-    return input;
+    return money;
   }
 }
 
 /**
- *@function notifyUser(data) gets a number and generates a notification for the
+ *@function notifyUser(money) gets a number and generates a notification for the
  * user depending on the amount
  *
- * @param {string} data 
+ * @param {string} money 
  * @returns {string} 
  */
-function notifyUser(data) {
-  let lastChar = +(data.charAt(data.length - 1));
+function notifyUser(money) {
+  let lastNum = Number(money.charAt(money.length - 1));
+  let beforeLastNum = Number(money.charAt(money.length - 2));
   let ending = '';
   switch (true) {
-    case lastChar == 1:
-      ending = 'ь'
-      break;
-
-    case lastChar == 0 || 5 <= lastChar <= 9:
+    case beforeLastNum == 1 || lastNum == 0 || lastNum >= 5:
       ending = 'ей'
       break;
 
-    case 2 <= lastChar <= 4:
+    case lastNum == 1:
+      ending = 'ь'
+      break;
+
+    default:
       ending = 'я'
       break;
   }
-  return `Ваша сумма в ${data} рубл${ending} успешно зачислена.`
+  return `Ваша сумма в ${money} рубл${ending} успешно зачислена.`
 }
