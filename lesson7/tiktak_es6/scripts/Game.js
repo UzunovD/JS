@@ -5,12 +5,12 @@ class Game {
     this.phase = 'X';
   }
 
-  /** 
+  /**
    * Метод получает другие игровые объекты, которые нужны ему
    * для работы.
-   * @param {grid} grid
-   * @param {status} status
-   * @param {playMap} playMap
+   * @param {grid} Grid
+   * @param {status} Status
+   * @param {playMap} PlayMap
    */
   init(grid, status, playMap) {
     this.grid = grid;
@@ -22,12 +22,12 @@ class Game {
    * Инициализация обработчика событий.
    */
   initEventHandlers() {
-    // Ставим обработчик, при клике на таблицу вызовется функция 
+    // Ставим обработчик, при клике на таблицу вызовется функция
     // this.cellClickHandler().
-    this.grid.gameGrid.addEventListener('click', event =>
-      this.cellClickHandler(event));
+    this.grid.gameGrid.addEventListener('click', (event) =>
+      this.cellClickHandler(event)
+    );
   }
-
 
   /**
    * Обработчик события клика.
@@ -56,13 +56,16 @@ class Game {
   /**
    * Проверка был ли корректный клик, что описан в событии event.
    * @param {Event} event
-   * @returns {boolean} Вернет true в случае если статус игры "играем", 
-   * клик что описан в объекте event был по ячейке и ячейка куда был 
+   * @returns {boolean} Вернет true в случае если статус игры "играем",
+   * клик что описан в объекте event был по ячейке и ячейка куда был
    * произведен клик была пустой.
    */
   isCorrectClick(event) {
-    return this.status.isStatusPlaying() && this.isClickByCell(event) &&
-      this.isCellEmpty(event);
+    return (
+      this.status.isStatusPlaying() &&
+      this.isClickByCell(event) &&
+      this.isCellEmpty(event)
+    );
   }
 
   /**
@@ -109,88 +112,16 @@ class Game {
    * @returns {boolean} Вернет true, если игра выиграна, иначе false.
    */
   hasWon() {
-    return this.isLineWon({
-        x: 0,
-        y: 0
-      }, {
-        x: 1,
-        y: 0
-      }, {
-        x: 2,
-        y: 0
-      }) ||
-      this.isLineWon({
-        x: 0,
-        y: 1
-      }, {
-        x: 1,
-        y: 1
-      }, {
-        x: 2,
-        y: 1
-      }) ||
-      this.isLineWon({
-        x: 0,
-        y: 2
-      }, {
-        x: 1,
-        y: 2
-      }, {
-        x: 2,
-        y: 2
-      }) ||
-
-      this.isLineWon({
-        x: 0,
-        y: 0
-      }, {
-        x: 0,
-        y: 1
-      }, {
-        x: 0,
-        y: 2
-      }) ||
-      this.isLineWon({
-        x: 1,
-        y: 0
-      }, {
-        x: 1,
-        y: 1
-      }, {
-        x: 1,
-        y: 2
-      }) ||
-      this.isLineWon({
-        x: 2,
-        y: 0
-      }, {
-        x: 2,
-        y: 1
-      }, {
-        x: 2,
-        y: 2
-      }) ||
-
-      this.isLineWon({
-        x: 0,
-        y: 0
-      }, {
-        x: 1,
-        y: 1
-      }, {
-        x: 2,
-        y: 2
-      }) ||
-      this.isLineWon({
-        x: 0,
-        y: 2
-      }, {
-        x: 1,
-        y: 1
-      }, {
-        x: 2,
-        y: 0
-      });
+    return (
+      this.isLineWon({ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }) ||
+      this.isLineWon({ x: 0, y: 1 }, { x: 1, y: 1 }, { x: 2, y: 1 }) ||
+      this.isLineWon({ x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 }) ||
+      this.isLineWon({ x: 0, y: 0 }, { x: 0, y: 1 }, { x: 0, y: 2 }) ||
+      this.isLineWon({ x: 1, y: 0 }, { x: 1, y: 1 }, { x: 1, y: 2 }) ||
+      this.isLineWon({ x: 2, y: 0 }, { x: 2, y: 1 }, { x: 2, y: 2 }) ||
+      this.isLineWon({ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 2 }) ||
+      this.isLineWon({ x: 0, y: 2 }, { x: 1, y: 1 }, { x: 2, y: 0 })
+    );
   }
 
   /**
@@ -201,8 +132,10 @@ class Game {
    * @returns {boolean} Вернет true, если линия выиграна, иначе false.
    */
   isLineWon(a, b, c) {
-    let value = this.playMap.mapValues[a.y][a.x] + this.playMap.
-    mapValues[b.y][b.x] + this.playMap.mapValues[c.y][c.x];
+    let value =
+      this.playMap.mapValues[a.y][a.x] +
+      this.playMap.mapValues[b.y][b.x] +
+      this.playMap.mapValues[c.y][c.x];
     return value === 'XXX' || value === '000';
   }
 
